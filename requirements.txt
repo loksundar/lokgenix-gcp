@@ -1,0 +1,5 @@
+# requirements.txt for Lokgenix Gradio App
+
+gradio
+gradio_client
+# requests # gradio_client should handle HTTP, but uncomment if you have other direct 'requests' usage.
