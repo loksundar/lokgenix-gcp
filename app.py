@@ -72,4 +72,10 @@ if __name__ == "__main__":
         print("CRITICAL ERROR: HF_API_TOKEN is not set. Please edit the script to include your token.")
         print("The application will likely fail to connect to your Hugging Face Space.")
     
-    LokGenix_chat_interface.launch(server_name="0.0.0.0")
+    port = int(os.environ.get("PORT", 8080))
+    print(f"Starting Gradio on 0.0.0.0:{port}")
+    LokGenix_chat_interface.launch(
+        server_name="0.0.0.0",
+        server_port=port,
+        share=False  # optional, and prevents Gradio from trying to open a tunnel
+    )
