@@ -50,13 +50,13 @@ def call_LokGenix_api(user_message, history):
 LokGenix_chat_interface = gr.ChatInterface(
     fn=call_LokGenix_api,
     title="LokGenix",
-    description="Ask LokGenix anything! Powered by your RAG application.",
+    description="Meet LokGenix – your AI-powered guide to Lok Sundar’s professional journey. Using a cutting-edge RAG system, I can pull from his work history, projects, and expertise to answer any question about his background.",
     chatbot=gr.Chatbot(
         height=600,
         show_copy_button=True,
         type="messages"
     ),
-    textbox=gr.Textbox(placeholder="Type your question for LokGenix here...", container=False, scale=7),
+    textbox=gr.Textbox(placeholder="Type your question for LokSundar here...", container=False, scale=7),
     theme="soft",
     examples=[
         ["Who are you?"],
