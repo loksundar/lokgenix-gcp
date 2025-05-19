@@ -50,7 +50,7 @@ def call_LokGenix_api(user_message, history):
 LokGenix_chat_interface = gr.ChatInterface(
     fn=call_LokGenix_api,
     title="LokGenix",
-    description="Meet LokGenix – your AI-powered guide to Lok Sundar’s professional journey. Using a cutting-edge RAG system, I can pull from his work history, projects, and expertise to answer any question about his background.",
+    description="Gen AI agent leveraging a RAG-based knowledge system to tap into Lok Sundar’s work history, projects, and expertise—ready to answer any question about his professional journey.",
     chatbot=gr.Chatbot(
         height=600,
         show_copy_button=True,
