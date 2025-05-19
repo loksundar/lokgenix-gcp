@@ -60,7 +60,7 @@ LokGenix_chat_interface = gr.ChatInterface(
     theme="soft",
     examples=[
         ["Who are you?"],
-        ["Can you explain the concept of vector databases?"],
+        ["Tell me about Data Engineering Project's you have worked on?"],
         ["Tell me about Yourself?"],
     ],
     cache_examples=False,
