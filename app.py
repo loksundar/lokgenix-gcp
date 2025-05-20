@@ -1,8 +1,8 @@
 import gradio as gr
 from gradio_client import Client
+from fastapi import FastAPI
 from gradio_client.exceptions import AppError # Corrected: Import AppError as suggested by the traceback
 import os
-from starlette.middleware.proxy_headers import ProxyHeadersMiddleware
 import uvicorn
 # --- Configuration for your Hugging Face API ---
 # !!! IMPORTANT: Replace placeholder token with your actual Hugging Face API Token !!!
@@ -67,8 +67,8 @@ LokGenix_chat_interface = gr.ChatInterface(
     cache_examples=False,
 ).queue()
 
-app = LokGenix_chat_interface.server_app
-app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
+app = FastAPI()
+app = gr.mount_gradio_app(app, LokGenix_chat_interface, path="/")
 
 
 # --- Launch the Gradio App ---
@@ -76,10 +76,10 @@ if __name__ == "__main__":
     if not HF_API_TOKEN or HF_API_TOKEN == "YOUR_HUGGING_FACE_API_TOKEN_HERE":
         print("CRITICAL ERROR: HF_API_TOKEN is not set. Please edit the script to include your token.")
         print("The application will likely fail to connect to your Hugging Face Space.")
-
     uvicorn.run(
         app,
         host="0.0.0.0",
         port=int(os.environ.get("PORT", 8080)),
+        proxy_headers=True,
         # no TLS here—Cloud Run handles HTTPS for you
     )
