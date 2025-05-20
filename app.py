@@ -1,6 +1,7 @@
 import gradio as gr
 from gradio_client import Client
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from gradio_client.exceptions import AppError # Corrected: Import AppError as suggested by the traceback
 import os
 import uvicorn
@@ -68,7 +69,15 @@ LokGenix_chat_interface = gr.ChatInterface(
 ).queue()
 
 app = FastAPI()
-app = gr.mount_gradio_app(app, LokGenix_chat_interface, path="/")
+
+# 1️⃣ Mount Gradio at /gradio instead of "/"
+app = gr.mount_gradio_app(app, LokGenix_chat_interface, path="/gradio")
+
+# 2️⃣ Root ("/") handler that sends a single redirect to /gradio
+@app.get("/", include_in_schema=False)
+def redirect_to_gradio():
+    return RedirectResponse("/gradio")
+
 
 
 # --- Launch the Gradio App ---
