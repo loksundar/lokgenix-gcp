@@ -64,7 +64,7 @@ LokGenix_chat_interface = gr.ChatInterface(
         ["Tell me about Yourself?"],
     ],
     cache_examples=False,
-)
+).queue()
 
 # --- Launch the Gradio App ---
 if __name__ == "__main__":
@@ -77,5 +77,6 @@ if __name__ == "__main__":
     LokGenix_chat_interface.launch(
         server_name="0.0.0.0",
         server_port=port,
+        root_path="/",
         share=False  # optional, and prevents Gradio from trying to open a tunnel
     )
